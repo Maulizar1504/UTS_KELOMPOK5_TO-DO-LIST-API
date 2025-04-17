@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #ffffff);
+      color: #100346;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2.8em;
+    }
+
+    .profile-img {
+      position: relative;
+      width: 170px;
+      height: 180px;
+      border-radius: 60%;
+      overflow: hidden;
+      margin: 25px 0;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0px #ffffff;
+    }
+
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .edit-icon {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      padding: 6px;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+    }
+
+    .username {
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    .btn {
+      background-color: #100346;
+      color: rgb(255, 255, 255);
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #ffffff;
+      border: none;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #100346;
+    }
+
+    .option {
+      width: 300px;
+      background-color: #100346;
+      color: rgb(255, 255, 255);
+      border: 2px solid #100346;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .option:hover {
+      background-color: #333366;
+      transform: scale(1.03);
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 99;
+    }
+
+    .popup-content {
+      background: #1e1e1e;
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      width: 80%;
+      max-width: 400px;
+      box-shadow: 0 0 20px #00ffcc;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .popup-content input[type="file"] {
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 8px;
+      border: none;
+      width: 100%;
+    }
+
+    .popup-content button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .popup-content button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px #00ffcc;
+    }
+
+    .save-btn {
+      background-color: #00cc66;
+      color: white;
+    }
+
+    .cancel-btn {
+      background-color: #ff4444;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Profile</h1>
+  <div class="profile-img">
+    <img id="profilePic" src="profile.jpg" alt="Profile"/>
+    <img class="edit-icon" src="profile.jpg" onclick="showPopup('editProfilePopup')"/>
+  </div>
+
+
+  <button class="btn" onclick="showPopup('editProfilePopup')">Edit Profile</button>
+
+  <div class="option" onclick="showPopup('resetPopup')">
+    <span>🔐 Reset Password</span>
+    <span>▶</span>
+  </div>
+  <div class="option" onclick="showPopup('deletePopup')">
+    <span>🗑️ Delete Account</span>
+    <span>▶</span>
+  </div>
+  <div class="option" onclick="showPopup('logoutPopup')">
+    <span>🚪 Log Out</span>
+    <span>▶</span>
+  </div>
+
+  <!-- Popups -->
+  <div class="popup" id="editProfilePopup">
+    <div class="popup-content">
+      <h3>Edit Profile</h3>
+      <input type="file" id="uploadImg" accept="image/*">
+      <br>
+      <button class="save-btn" onclick="saveProfilePic()">Simpan</button>
+      <button class="cancel-btn" onclick="hidePopup('editProfilePopup')">Batal</button>
+    </div>
+  </div>
+
+  <div class="popup" id="resetPopup">
+    <div class="popup-content">
+      <p>Apakah kamu ingin mereset password?</p>
+      <button class="save-btn" onclick="confirmReset()">Ya</button>
+      <button class="cancel-btn" onclick="hidePopup('resetPopup')">Batal</button>
+    </div>
+  </div>
+
+  <div class="popup" id="deletePopup">
+    <div class="popup-content">
+      <p>Yakin ingin menghapus akun?</p>
+      <button class="save-btn" onclick="confirmDelete()">Ya</button>
+      <button class="cancel-btn" onclick="hidePopup('deletePopup')">Batal</button>
+    </div>
+  </div>
+
+  <div class="popup" id="logoutPopup">
+    <div class="popup-content">
+      <p>Ingin keluar dari akun?</p>
+      <button class="save-btn" onclick="confirmLogout()">Ya</button>
+      <button class="cancel-btn" onclick="hidePopup('logoutPopup')">Batal</button>
+    </div>
+  </div>
+
+  <!-- Tambahkan popup konfirmasi setelah reset/delete/logout -->
+<div class="popup" id="confirmPopup">
+  <div class="popup-content">
+    <p id="confirmMessage">...</p>
+    <button class="save-btn" onclick="goToLogin()">OK</button>
+  </div>
+</div>
+
+  <script>
+    function showPopup(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+  
+    function hidePopup(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  
+    function saveProfilePic() {
+      const input = document.getElementById('uploadImg');
+      const file = input.files[0];
+  
+      if (!file) {
+        alert("Kamu belum memilih gambar.");
+        return;
+      }
+  
+      if (file.size > 2 * 1024 * 1024) { // Maksimal 2MB
+        alert("Ukuran gambar terlalu besar. Maksimum 2MB.");
+        return;
+      }
+  
+      const reader = new FileReader();
+  
+      reader.onload = function(e) {
+        document.getElementById('profilePic').src = e.target.result;
+        console.log("Gambar berhasil di-load!");
+      }
+  
+      reader.onerror = function(e) {
+        alert("Gagal membaca file gambar.");
+        console.error("FileReader error:", e);
+      }
+  
+      reader.readAsDataURL(file);
+      hidePopup('editProfilePopup');
+    }
+  
+    function confirmReset() {
+  hidePopup('resetPopup');
+  document.getElementById("confirmMessage").innerText = "Password berhasil direset! 🎉";
+  showPopup("confirmPopup");
+}
+
+function confirmDelete() {
+  const yakin = confirm("Data akun akan dihapus secara permanen. Lanjutkan?");
+  if (yakin) {
+    hidePopup('deletePopup');
+    document.getElementById("confirmMessage").innerText = "Akunmu telah dihapus 😢";
+    showPopup("confirmPopup");
+  } else {
+    hidePopup('deletePopup');
+  }
+}
+
+function confirmLogout() {
+  hidePopup('logoutPopup');
+  document.getElementById("confirmMessage").innerText = "Kamu telah keluar dari akun.";
+  showPopup("confirmPopup");
+}
+
+function goToLogin() {
+  // Cukup redirect ke login tanpa alert atau konfirmasi lagi
+  window.location.replace("login.html");
+}
+</script>  
+
+</body>
+</html>
