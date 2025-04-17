@@ -1,0 +1,135 @@
+/* === GLOBAL === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Orbitron';
+  background-color: #ffffff; /* Putih total */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000; /* Warna teks jadi hitam supaya kelihatan di background putih */
+}
+
+/* === CONTAINER === */
+.container {
+  background-color: #100346;
+  border: 2px solid #ededed;
+  border-radius: 16px;
+  padding: 40px 30px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 25px #edf1ed;
+  text-align: center;
+}
+
+/* === TITLES === */
+h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+/* === FORM ELEMENTS === */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  text-align: left;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: #e0e0e0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ffffff;
+  font-size: 1rem;
+  background-color: #ffffff;
+  color: #1b1f1b;
+  font-family: 'Orbitron';
+}
+
+input::placeholder {
+  color: #aaa;
+  opacity: 0.8;
+}
+
+/* === BUTTON === */
+button {
+  font-family: 'Orbitron', sans-serif;
+  background-color: #00ed00;
+  color: black;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  border: none;
+  transition: transform 0.2s, background-color 0.2s;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: #00e000;
+}
+
+/* === LINK TEXT === */
+.signup-link,
+p {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: #c5c5c5;
+}
+
+.signup-link a,
+p a {
+  color: #0a97f5;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signup-link a:hover,
+p a:hover {
+  text-decoration: underline;
+}
+
+/* === RESPONSE MESSAGE === */
+.response {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  color: #ffaaaa;
+}
+
+/* === HIDDEN CLASS === */
+.hidden {
+  display: none;
+}
+
+.check-icon {
+  margin-right: 8px;
+}
+.actions button {
+  margin-right: 4px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: #ffffff;
+  font-family: 'Orbitron';
+  cursor: pointer;
+}
+
+.edit-btn { background-color: #00cfff; color: white; }
+.delete-btn { background-color: #ff3b3b; color: white; }
+.done-btn { background-color: #00ed00; color: rgb(0, 0, 0); }
